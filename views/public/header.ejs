@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>
+		<%= title %>
+	</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/core.css">
+	<link rel="stylesheet" href="/css/shortcode/shortcodes.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/responsive.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="stylesheet" href="/css/manage.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/modernizr-2.8.3.min.js"></script>
+	<style type="text/css">
+	.header-pos {
+		padding: 0 0 0 0 !important;
+	}
+
+	.fenlei {
+		width: 200px !important;
+		left: -30px !important;
+		border: 1px solid #EAEAEA !important;
+		background-color: #FFFFFF !important;
+	}
+
+	.fenlei a {
+		color: #000000 !important;
+	}
+
+	.fenlei a:hover {
+		color: #ffae00 !important;
+	}
+
+	.myinfo {
+		width: 240px !important;
+		left: -30px !important;
+		border: 1px solid #EAEAEA !important;
+		background-color: #FFFFFF !important;
+	}
+
+	.myinfo a {
+		color: #000000 !important;
+	}
+
+	.myinfo a:hover {
+		color: #ffae00 !important;
+	}
+</style>
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<header class="header-pos">
+		<div class="header-area header-middle">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2 col-sm-3 col-xs-12">
+						<div class="logo">
+							<a href="/home"><img src="/images/logo/logo.png" style="height:60px;"/></a>
+						</div>
+					</div>
+					<div class="col-md-10 col-sm-9 col-xs-12 text-right xs-center">
+						<div class="main-menu display-inline hidden-sm hidden-xs">
+							<nav>
+								<ul>
+									<li><a href="/home">首页</a></li>
+									<li><a href="">分类查看</a>
+										<div class="mega-menu fenlei">
+											<ul>
+												<li><a href="/category/哲学类">哲学类</a></li>
+												<li><a href="/category/社会科学类">社会科学类</a></li>
+												<li><a href="/category/政治类">政治类</a></li>
+												<li><a href="/category/经济文化类">经济文化类</a></li>
+												<li><a href="/category/教育类">教育类</a></li>
+												<li><a href="/category/艺术类">艺术类</a></li>
+												<li><a href="/category/天文类">天文类</a></li>
+												<li><a href="/category/医学类">医学类</a></li>
+												<li><a href="/category/程序类">程序类</a></li>
+												<li><a href="/category/其他">其他</a></li>
+											</ul>
+										</div>
+									</li>
+									<li><a href="/category/rmtj">热门推荐</a></li>
+									<li><a href="">欢迎您，<%= name %></a>
+										<div class="mega-menu myinfo">
+											<ul>
+												<% if(usertype == 0){ %>
+												<li><a href="/users/userorder">我的订单</a></li>
+												<% }else if(usertype == 1){ %>
+												<li><a href="/shop/manage">管理店铺</a></li>
+												<li><a href="/shop/shoporder">我的订单</a></li>
+												<% } %>
+												<li><a href="/logout">退出</a></li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<% if(usertype == 0){ %>
+						<div class="shopping-cart ml-20 display-inline">
+							<a href="/book/shopcart"><b>购物车</b></a>
+						</div>
+						<% }else if(usertype == 1){ %>
+
+						<% } %>
+						<div class="search-block-top display-inline">
+							<div class="icon-search"></div>
+							<div class="toogle-content">
+								<form action="/category/search" method="post" id="searchbox">
+									<input type="text" name="search_val" placeholder="Search" />
+									<button class="button-search" type="submit"></button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>

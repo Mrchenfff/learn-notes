@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>
+		<%= title %>
+	</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+
+<body>
+	<div class="all">
+		<div class="container login-bg">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-0 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+					<div class="login-logo">
+						<h1 class="text-center"><%= logintit %>登录&nbsp;&nbsp;
+							<a href="<%= loginurl %>" style="font-size:12px; color:#FFFFFF;">切换到<%= logintit2 %>登陆</a>
+						</h1>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-md-offset-0 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+					<div class="formbox">
+						<form class="" action="" method="">
+							<div class="input-group">
+								<span class="input-group-addon" id="usernamespan">
+									<span class="glyphicon glyphicon-user"></span>
+								</span>
+								<input type="text" id="username" name="username" class="form-control" placeholder="Username" aria-describedby="usernamespan">
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon" id="passwordspan">
+									<span class="glyphicon glyphicon-th"></span>
+								</span>
+								<input type="password" id="password" name="password" class="form-control" placeholder="Password" aria-describedby="passwordspan">
+							</div>
+							<button type="button" class="btn btn-default" data-toggle="modal" data-target="<%= modalname %>">
+								注册
+							</button>
+							<input type="button" class="btn btn-primary pull-right" id="login" style="display: block;" value="登录">
+							</input>
+							<div class="clear"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-md-offset-0 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+					<div id="login_msg"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 个人注册弹出层 -->
+	<div class="modal fade" id="user_reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">个人注册</h4>
+				</div>
+				<form action="" method="">
+					<fieldset>
+						<div class="modal-body">
+							<div id="reg_wrong1">
+
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">账号</span>
+									<input type="text" class="form-control" placeholder="账号" name="username1">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">密码</span>
+									<input type="password" class="form-control" placeholder="密码" name="password1">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">密码</span>
+									<input type="password" class="form-control" placeholder="请再次输入密码" name="re_pwd1">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">姓名</span>
+									<input type="text" class="form-control" placeholder="姓名" name="name1">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">电话</span>
+									<input type="text" class="form-control" placeholder="联系方式" name="phonenumber1">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">地址</span>
+									<input type="text" class="form-control" placeholder="收货地址" name="address1">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" id="reg1">注册</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 商家注册弹出层 -->
+	<div class="modal fade" id="bus_reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">商家注册</h4>
+				</div>
+				<form action="/reg_business" method="post">
+					<fieldset>
+						<div class="modal-body">
+							<div id="reg_wrong2">
+
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">账号</span>
+									<input type="text" class="form-control" placeholder="账号" name="username2">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">密码</span>
+									<input type="password" class="form-control" placeholder="密码" name="password2">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">密码</span>
+									<input type="password" class="form-control" placeholder="请再次输入密码" name="re_pwd2">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">姓名</span>
+									<input type="text" class="form-control" placeholder="姓名" name="name2">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">电话</span>
+									<input type="text" class="form-control" placeholder="联系方式" name="phonenumber2">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">地址</span>
+									<input type="text" class="form-control" placeholder="地址" name="address2">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" id="reg2">注册</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bookstore/register.js"></script>
+<script type="text/javascript">
+	// ajax登录
+	function clean_class() {
+		setTimeout(function() {
+			$('#login_msg').removeClass().text('');
+		}, 1000);
+	}
+	$(document).on('click', "#login", function() {
+		var username = $('input[name="username"]').val();
+		var password = $('input[name="password"]').val();
+		if (username == '' || password == '') {
+			$('#login_msg').removeClass().addClass('alert alert-warning').text('用户名或密码不能为空');
+			clean_class();
+		} else {
+			$.ajax({
+				url: '<%= url %>',
+				type: 'POST',
+				dataType: 'json',
+				cache: false,
+				timeout: 5000,
+				data: {
+					username: username,
+					password: password
+				},
+				success: function(data) {
+					var res = data;
+					if (res[0] == 'success') {
+						$('#login_msg').removeClass().addClass('alert alert-success').text(res[1]);
+						location.href = "/home";
+					} else {
+						$('#login_msg').removeClass().addClass('alert alert-warning').text(res[1]);
+						clean_class();
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					$('#login_msg').text('无法连接服务器');
+				}
+			});
+		}
+	});
+</script>
+</html>

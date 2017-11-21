@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>
+		error:<%= title %>
+	</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/error.css">
+</head>
+<!-- <h1><%= message %></h1>
+<h2><%= error.status %></h2>
+<pre><%= error.stack %></pre> -->
+
+<body>
+	<div class="all">
+		<div class="container err_bg">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-0 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+					<h1><%= error.status %></h1>
+					<h4><%= message %></h4><br>
+					<h5><%= error.stack %></pre></h5>
+					<a href="/" class="btn btn-warning">返回首页</a>
+					<!-- <p><%= error.stack %></p> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

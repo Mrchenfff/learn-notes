@@ -1,0 +1,112 @@
+<% include ../public/header.ejs %>
+
+<style type="text/css">
+.manage-tit {
+		background: rgba(48, 65, 96, 0.8);
+		border-radius: 3px 3px 0 0;
+		color: #FFFFFF;
+		padding: 1px 0 14px 0;
+	}
+}
+</style>
+<div class="container" style="margin-top: 100px;">
+	<div class="row">
+		<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-1 col-xs-12 col-xs-offset-1">
+			<div class="manage-tit">
+				<div class="col-md-6">
+					<h3 class="text-left">管理店铺</h3>
+				</div>
+				<div class="col-md-6">
+					<h6><button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#shop_add">添加店铺</button></h6>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 添加店铺弹出层 -->
+<div class="modal fade" id="shop_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">添加店铺</h4>
+			</div>
+			<form action="" method="">
+				<fieldset>
+					<div class="modal-body">
+						<div id="addshopmessage">
+
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon">店铺名称</span>
+								<input type="text" class="form-control" placeholder="店铺名" name="shop_name">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" id="btn_shopadd">添加</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="container" style="margin-top: 50px;">
+	<div class="row">
+			<div class="col-md-9 col-md-offset-1" style="margin-top:30px;">
+				<% if(success_msg != ''){ %>
+					<div class="alert alert-success">
+						<%= success_msg %>
+					</div>
+					<% } %>
+						<% if(error_msg != ''){ %>
+							<div class="alert alert-danger">
+								<%= error_msg %>
+							</div>
+							<% } %>
+			</div>
+		</div>
+	<% for(var i = 0; i < datas.length; i++) { %>
+		<div class="col-md-4" style="padding-left: 40px;padding-right: 40px;">
+			<h3>店铺名：<%= datas[i].shop_name %></h3>
+			<h4><a href="/shop/inshop/<%= datas[i].id %>" class="btn btn-default">进入店铺</a></h4>
+			<h4><button class="btn btn-default btn_xgdp" data-toggle="modal">修改<%= datas[i].shop_name %>名称</button></h4>
+		</div>
+		<div class="modal fade shop_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">修改<%= datas[i].shop_name %>名称</h4>
+					</div>
+					<form action="" method="">
+						<fieldset>
+							<div class="modal-body">
+								<div class="xgshopmessage">
+
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-addon">店铺名称</span>
+										<input type="hidden" class="xgshopid" value="<%= datas[i].id %>">
+										<input type="text" class="form-control xgshopname" placeholder="<%= datas[i].shop_name %>">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary btn_wcxg">修改</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+		<% } %>
+</div>
+<script src="/js/bookstore/shopmanage.js"></script>
+
+<% include ../public/footer.ejs %>

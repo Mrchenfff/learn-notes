@@ -1,0 +1,207 @@
+<% include header.ejs %>
+	<style>
+		.start_top {
+			width: 100%;
+			height: 50%;
+			background-color: #ffae00;
+			position: fixed;
+			top: 0;
+			z-index: 9999;
+		}
+
+		.start_center {
+			width: 0;
+			height: 4px;
+			background-color: #FFFFFF;
+			position: fixed;
+			top: 50%;
+			margin-top: 2px;
+			z-index: 10000;
+		}
+
+		.start_bottom {
+			width: 100%;
+			height: 50%;
+			background-color: #ffae00;
+			position: fixed;
+			bottom: 0;
+			z-index: 9999;
+		}
+	</style>
+	<div class="start_top"></div>
+	<div class="start_center"></div>
+	<div class="start_bottom"></div>
+
+	<div class="new-arrival-area pt-100" style="margin-top: 100px;">
+		<div class="container">
+			<div class="row">
+				<div class="section-title text-center mb-20">
+					<h2>新品上架</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="product-tab">
+						<div class="row">
+							<div class="tab-content">
+								<div class="tab-pane active" id="home">
+									<div class="product-carousel">
+										<% for(var i = 0; i < books.length; i+=2) { %>
+											<div class="col-md-12">
+												<div class="product-wrapper mb-40">
+													<div class="product-img">
+														<% if (books[i].image != null) { %>
+															<img src="<%= books[i].image %>" alt="" />
+															<% }else { %>
+																<img src="/images/product/12.jpg" alt="" />
+																<% } %>
+																	<span class="new-label">New</span>
+																	<div class="product-action">
+																		<a href="#" class="btn_bookcon" data-toggle="modal"><i class="pe-7s-look"></i></a>
+																	</div>
+													</div>
+													<div class="product-content">
+														<div class="pro-title">
+															<h3><a href="#"><%= books[i].book_name %></a></h3>
+														</div>
+														<div class="price-reviews">
+															<div class="price-box">
+																<span class="price product-price">￥<%= books[i].discount %></span>
+																<span class="old-price product-price"><%= books[i].price %></span>
+															</div>
+														</div>
+														<div class="pro-title">
+															<h5>库存：<%= books[i].stock %></h5>
+															<h5>销量：<%= books[i].sales_volume %></h5>
+														</div>
+													</div>
+												</div>
+												<% if (i + 1 < books.length) { %>
+													<div class="product-wrapper mb-40">
+														<div class="product-img">
+															<% if (books[i+1].image != null) { %>
+																<img src="<%= books[i+1].image %>" alt="" />
+																<% }else { %>
+																	<img src="/images/product/12.jpg" alt="" />
+																	<% } %>
+																		<span class="new-label">New</span>
+																		<div class="product-action">
+																			<a href="#" class="btn_bookcon" data-toggle="modal"><i class="pe-7s-look"></i></a>
+																		</div>
+														</div>
+														<div class="product-content">
+															<div class="pro-title">
+																<h3><a href="#"><%= books[i+1].book_name %></a></h3>
+															</div>
+															<div class="price-reviews">
+																<div class="price-box">
+																	<span class="price product-price">￥<%= books[i+1].discount %></span>
+																	<span class="old-price product-price"><%= books[i+1].price %></span>
+																</div>
+															</div>
+															<div class="pro-title">
+																<h5>库存：<%= books[i+1].stock %></h5>
+															</div>
+														</div>
+													</div>
+													<% } %>
+											</div>
+											<% } %>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% for(var i = 0; i < books.length; i+=2) { %>
+		<div class="modal fade bookcon_modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="col-md-6 col-md-offset-3 joincartmessage"></div>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+					</div>
+					<div class="modal-body">
+						<div class="modal-img">
+							<% if (books[i].image != null) { %>
+								<img src="<%= books[i].image %>" alt="" />
+								<% }else { %>
+									<img src="/images/product/1.jpg" alt="" />
+									<% } %>
+						</div>
+						<div class="modal-pro-content">
+							<h3><a href="#"><%= books[i].book_name %></a></h3>
+							<div class="price">
+								<span>￥<%= books[i].discount %></span>
+								<span class="old"><%= books[i].price %></span>
+							</div>
+							<p>
+								<%= books[i].detail %>
+							</p>
+							<form action="#">
+								<input type="hidden" class="cart_bookid" value="<%= books[i].id %>">
+								<input type="number" class="cart_num" value="1" />
+								<% if (usertype == 0){ %>
+									<input type='button' class="btn_tocart btn btn-primary" value="joincart">
+								<% }else{ %>
+									<input type='button' class="btn_tocart btn btn-primary" value="joincart" disabled>
+								<% } %>
+							</form>
+							<div class="product_meta">
+								<span class="posted_in">分类: <a rel="tag" href="#"><%= books[i].category %></a></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% if (i + 1 < books.length) { %>
+			<div class="modal fade bookcon_modal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="col-md-6 col-md-offset-3 joincartmessage"></div>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+						</div>
+						<div class="modal-body">
+							<div class="modal-img">
+								<% if (books[i].image != null) { %>
+									<img src="<%= books[i+1].image %>" alt="" />
+									<% }else { %>
+										<img src="/images/product/1.jpg" alt="" />
+										<% } %>
+							</div>
+							<div class="modal-pro-content">
+								<h3><a href="#"><%= books[i+1].book_name %></a></h3>
+								<div class="price">
+									<span>￥<%= books[i+1].discount %></span>
+									<span class="old"><%= books[i+1].price %></span>
+								</div>
+								<p>
+									<%= books[i+1].detail %>
+								</p>
+								<form action="#">
+									<input type="hidden" class="cart_bookid" value="<%= books[i+1].id %>">
+									<input type="number" class="cart_num" value="1" />
+									<% if (usertype == 0){ %>
+										<input type='button' class="btn_tocart btn btn-primary" value="joincart">
+									<% }else{ %>
+										<input type='button' class="btn_tocart btn btn-primary" value="joincart" disabled>
+									<% } %>
+								</form>
+								<div class="product_meta">
+									<span class="posted_in">分类: <a rel="tag" href="#"><%= books[i+1].category %></a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
+				<% } %>
+					<script src="/js/bookstore/addcart.js"></script>
+
+					<% include footer.ejs %>

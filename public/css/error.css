@@ -1,0 +1,26 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	background: url(../images/con_bg.jpg) no-repeat center;
+	background-size: cover;
+}
+
+.clear {
+	clear: both;
+}
+
+.all {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.err_bg{
+	padding-top: 100px;
+}
+
+.err_bg{
+	color: rgba(255, 255, 255, 0.7);
+}

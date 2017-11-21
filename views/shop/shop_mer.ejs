@@ -1,0 +1,191 @@
+<% include ../public/header.ejs %>
+
+	<style type="text/css">
+	.manage-tit {
+			background: rgba(48, 65, 96, 0.8);
+			border-radius: 3px 3px 0 0;
+			color: #FFFFFF;
+			padding: 1px 0 14px 0;
+		}
+	}
+	</style>
+	<div class="container" style="margin-top: 120px;">
+		<div class="row">
+			<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-1 col-xs-12 col-xs-offset-1">
+				<div class="manage-tit">
+					<div class="col-md-6">
+						<h3 class="text-left"><%= shopinformation.shop_name %>
+						<h6>所属人：<%= shopinformation.mer_name %></h6>
+					</%></h3>
+					</div>
+					<div class="col-md-6">
+						<h6><button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#book_add">添加书籍</button></h6>
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3" style="margin-top:10px;">
+				<a href="/shop/manage" class="btn btn-primary">返回店铺管理</a>
+			</div>
+		</div>
+	</div>
+	<!-- 添加书籍弹出层 -->
+	<div class="modal fade" id="book_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">添加书籍</h4>
+				</div>
+				<form action="" method="">
+					<fieldset>
+						<div class="modal-body">
+							<div id="addbookmessage">
+
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">名称：</span>
+									<input type="text" class="form-control" placeholder="书籍名称" name="book_name">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">描述：</span>
+									<input type="text" class="form-control" placeholder="书籍描述" name="detail">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">类别：</span>
+									<select name="category" class="selectpicker show-tick form-control">
+										<option value="哲学类">哲学类</option>
+										<option value="社会科学类">社会科学类</option>
+										<option value="政治类">政治类</option>
+										<option value="经济文化类">经济文化类</option>
+										<option value="教育类">教育类</option>
+										<option value="艺术类">艺术类</option>
+										<option value="天文类">天文类</option>
+										<option value="医学类">医学类</option>
+										<option value="程序类">程序类</option>
+										<option value="其它">其它</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">原价：</span>
+									<input type="text" class="form-control" placeholder="书籍价格" name="price">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">库存：</span>
+									<input type="number" class="form-control" placeholder="库存" name="stock">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">特价：</span>
+									<input type="text" class="form-control" placeholder="特价" name="discount">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" id="btn_addbook">添加</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="new-arrival-area pt-100" style="margin-top: -50px;">
+		<div class="container">
+			<div class="row">
+				<div class="section-title text-center mb-20">
+					<h2>本店书籍</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="product-tab">
+						<div class="row">
+							<div class="tab-content">
+								<div class="tab-pane active" id="home">
+									<div class="product-carousel">
+										<% for(var i = 0; i < books.length; i+=2) { %>
+											<div class="col-md-12">
+												<div class="product-wrapper mb-40">
+													<div class="product-img">
+														<% if (books[i].image != null) { %>
+															<img src="<%= books[i].image %>" alt="" />
+														<% }else { %>
+															<img src="/images/product/12.jpg" alt="" />
+														<% } %>
+														<div class="product-action">
+															<a href="/book/loadbook/<%= books[i].id %>"><i class="pe-7s-folder"></i></a>
+														</div>
+													</div>
+													<div class="product-content">
+														<div class="pro-title">
+															<h3><a href="#"><%= books[i].book_name %></a></h3>
+														</div>
+														<div class="price-reviews">
+															<div class="price-box">
+																<span class="price product-price">$<%= books[i].discount %></span>
+																<span class="old-price product-price"><%= books[i].price %></span>
+															</div>
+														</div>
+														<div class="pro-title">
+															<h5>库存：<%= books[i].stock %></h5>
+															<h5>销量：<%= books[i].sales_volume %></h5>
+														</div>
+													</div>
+												</div>
+												<% if (i + 1 < books.length) { %>
+													<div class="product-wrapper mb-40">
+														<div class="product-img">
+															<% if (books[i+1].image != null) { %>
+																<img src="<%= books[i+1].image %>" alt="" />
+															<% }else { %>
+																<img src="/images/product/12.jpg" alt="" />
+															<% } %>
+															<div class="product-action">
+																<a href="/book/loadbook/<%= books[i+1].id %>"><i class="pe-7s-folder"></i></a>
+															</div>
+														</div>
+														<div class="product-content">
+															<div class="pro-title">
+																<h3><a href="#"><%= books[i+1].book_name %></a></h3>
+															</div>
+															<div class="price-reviews">
+																<div class="price-box">
+																	<span class="price product-price">$<%= books[i+1].discount %></span>
+																	<span class="old-price product-price"><%= books[i+1].price %></span>
+																</div>
+															</div>
+															<div class="pro-title">
+																<h5>库存：<%= books[i+1].stock %></h5>
+																<h5>销量：<%= books[i+1].sales_volume %></h5>
+															</div>
+														</div>
+													</div>
+												<% } %>
+											</div>
+											<% } %>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/bookstore/addbook.js"></script>
+
+	<% include ../public/footer.ejs %>
