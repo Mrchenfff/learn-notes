@@ -106,7 +106,6 @@ module.exports = {
 				if (err) {
 					return callback(err);
 				}
-				// 查询店铺id、店铺名、店铺所属人
 				var sql = "select shop.id as sid, shop_name,mer_name from merchant,shop where shop.id = ? and shop.mer_id = merchant.id";
 				connection.query(sql, id, function(err, shopinformation) {
 					if (err) {
