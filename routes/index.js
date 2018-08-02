@@ -6,21 +6,23 @@ var mermodel = require('../models/merchantmodel');
 
 // 首页个人登录页面
 router.get('/', function(req, res, next) {
+    req.session.login = 1;
 	res.render('index', {
-		title: '网上书城个人登录',
+		title: '青年书社个人登录',
         logintit: '个人',
-        logintit2: '商家',
+        logintit2: '管理员',
         loginurl: '/bus_login',
         modalname: '#user_reg',
+        lonin:true,
         url: '/personal_login'
     });
 });
 
-// 首页商家登陆页面
+// 首页管理员登陆页面
 router.get('/bus_login', function(req, res, next) {
 	res.render('index', {
-		title: '网上书城商家登陆',
-        logintit: '商家',
+		title: '青年书社卖家登陆',
+        logintit: '管理员',
         logintit2: '个人',
         loginurl: '/',
         modalname: '#bus_reg',
@@ -36,22 +38,6 @@ router.post('/reg_user', function(req, res, next) {
     var phonenumber = req.body.phonenumber;
     var address = req.body.address;
     usermodel.user_reg(username, password, name, phonenumber, address, function(err, rows) {
-        if (err) {
-            res.json(['error', "注册失败:" + err]);
-            return next(err);
-        }
-        res.json(['success', "注册成功"]);
-    });
-});
-
-// 商家注册
-router.post('/reg_mer', function(req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-    var name = req.body.name;
-    var phonenumber = req.body.phonenumber;
-    var address = req.body.address;
-    mermodel.mer_reg(username, password, name, phonenumber, address, function(err, rows) {
         if (err) {
             res.json(['error', "注册失败:" + err]);
             return next(err);
@@ -113,12 +99,12 @@ router.get('/home', function(req, res, next) {
 	usermodel.homeallbook(function(err, rows) {
 		if (err) {
 			res.render('public/home', {
-				title: '网上书城首页',
+				title: '青年书城首页',
 				books: []
 			})
 		}
 		res.render('public/home', {
-			title: '网上书城首页',
+			title: '青年书城首页',
 			books: rows
 		})
 	})

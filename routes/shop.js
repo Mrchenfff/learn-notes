@@ -100,7 +100,23 @@ router.get('/shoporder', function(req, res, next) {
 		});
 	})
 });
-
+// 我的订单
+router.get('/ordershow/:id', function(req, res, next) {
+	var id = req.params.id;
+	shopmodel.shopordershow(id, function(err, rows) {
+		console.log(rows);
+		if (err) {
+			res.render('business/ordershow', {
+				title: '商家：我的订单',
+				rows: []
+			});
+		}
+		res.render('business/ordershow', {
+			title: '商家：我的订单',
+			rows: rows
+		});
+	})
+});
 // 处理订单
 router.get('/clorder/:oid', function(req, res, next) {
 	var oid = req.params.oid;
@@ -109,6 +125,7 @@ router.get('/clorder/:oid', function(req, res, next) {
 			req.flash('error_msg','发货失败：' + err);
 			res.redirect('/shop/shoporder');
 		}
+		
 		req.flash('success_msg','发货成功');
 		res.redirect('/shop/shoporder');
 	})

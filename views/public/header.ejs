@@ -50,6 +50,7 @@
 
 	.myinfo a:hover {
 		color: #ffae00 !important;
+		
 	}
 </style>
 <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
@@ -88,14 +89,21 @@
 										</div>
 									</li>
 									<li><a href="/category/rmtj">热门推荐</a></li>
+									<% if(usertype == 0){ %>
+									<li><a href="/users/usercontent">公告查看</a></li>
+									<% } %>
 									<li><a href="">欢迎您，<%= name %></a>
 										<div class="mega-menu myinfo">
 											<ul>
 												<% if(usertype == 0){ %>
 												<li><a href="/users/userorder">我的订单</a></li>
+												<li><a href="/users/userinfo">信息修改</a>
 												<% }else if(usertype == 1){ %>
-												<li><a href="/shop/manage">管理店铺</a></li>
-												<li><a href="/shop/shoporder">我的订单</a></li>
+												<li><a href='/users/usershow'>用户管理</a></li>
+												<li><a href="/shop/inshop/1">图书管理</a></li>
+												
+												<li><a href="/users/content">公告管理</a></li>
+												<li><a href="/shop/shoporder">订单管理</a></li>
 												<% } %>
 												<li><a href="/logout">退出</a></li>
 											</ul>

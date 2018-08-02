@@ -40,9 +40,11 @@
 								</span>
 								<input type="password" id="password" name="password" class="form-control" placeholder="Password" aria-describedby="passwordspan">
 							</div>
+							<% if(logintit=='个人'){ %>
 							<button type="button" class="btn btn-default" data-toggle="modal" data-target="<%= modalname %>">
 								注册
 							</button>
+							<% } %>
 							<input type="button" class="btn btn-primary pull-right" id="login" style="display: block;" value="登录">
 							</input>
 							<div class="clear"></div>

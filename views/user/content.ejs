@@ -1,0 +1,114 @@
+<% include ../public/header.ejs %>
+<style type="text/css">
+.manage-tit {
+		background: rgba(48, 65, 96, 0.8);
+		border-radius: 3px 3px 0 0;
+		color: #FFFFFF;
+		padding: 1px 0 14px 0;
+	}
+}
+</style>
+<div class="container" style="margin-top: 100px;">
+	<div class="row">
+			<div class="col-md-9 col-md-offset-1" style="margin-top:30px;">
+				<% if(success_msg != ''){ %>
+					<div class="alert alert-success">
+						<%= success_msg %>
+					</div>
+					<% } %>
+						<% if(error_msg != ''){ %>
+							<div class="alert alert-danger">
+								<%= error_msg %>
+							</div>
+							<% } %>
+			</div>
+		</div>
+	<div class="row">
+		<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-1 col-xs-12 col-xs-offset-1">
+			<div class="manage-tit">
+				<div class="col-md-6">
+					<h3 class="text-left">公告列表</h3>
+				</div>
+				<div class="col-md-6">
+					<h6><button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#shop_add">添加公告</button></h6>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<table class="table" style='width:70%;margin-left:15%'>
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>标题</th>
+      <th>发表时间</th>
+      <th style="width:50%">内容</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for(var i=0;i<rows.length;i++){ %>
+	<tr>
+      <td><%= rows[i].id %></td>
+      <td><%= rows[i].title %></td>
+      <td><span class="order_date"><%= rows[i].time %></span></td>
+      <td style="max-width: 110px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><%= rows[i].content %></td>
+      <td> <a class='btn btn-primary' href="/users/deletecontent/<%= rows[i].id %>">删除</a>
+      	   <a class='btn btn-primary' href="/users/contentshow/<%= rows[i].id %>">编辑</a>
+      </td>
+    </tr>
+  <% } %>
+    
+  </tbody>
+</table>
+<!-- 添加公告弹出层 -->
+<div class="modal fade" id="shop_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">添加公告</h4>
+			</div>
+			<form action="" method="">
+				<fieldset>
+					<div class="modal-body">
+						<div id="addshopmessage">
+
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<label for="name">公告标题：</label>
+								<input type="text" class="form-control" placeholder="公告名" name="title">			
+							</div>
+							<div class="input-group">
+								<label for="name">公告内容：</label>
+								<textarea class="form-control" rows="3" name='content'></textarea>		
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" id="btn_contentadd">添加</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+$('#btn_contentadd').click(function() {
+var title = $('input[name="title"]').val();
+var content = $('textarea[name="content"]').val();
+var url='/users/addcontent';
+var data={'title':title,'content':content};
+	$.post(url,data,function(msg){
+	alert('添加成功');
+	window.location.href='/users/content';
+})
+})
+</script>
+<script src="/js/bookstore/ordertime.js"></script>
+<% include ../public/footer.ejs %>
